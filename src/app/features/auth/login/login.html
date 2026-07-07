@@ -1,16 +1,27 @@
 <div class="container mt-5">
-    <form class="w-50 mx-auto bg-light p-5 rounded shadow">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-50 mx-auto bg-light p-5 rounded shadow">
+
     <h2 class="text-center text-success">Eco Stock</h2>
+
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="" class="form-label">Nom d'utilisateur</label>
+    <input type="email" class="form-control" [class.is-invalid]="username.invalid && username.touched" formControlName="username" placeholder="Votre username">
+    @if (username.invalid && username.touched) {
+        <small class="invalid-feedback">Le nom utilisateur est obligatoire.</small>
+        }
   </div>
+
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control" [class.is-invalid]="password.invalid && password.touched" formControlName="password" placeholder="Votre mot de passe">
+        @if (password.invalid && password.touched) {
+        <small class="invalid-feedback">Le mot de passe est obligatoire.</small>
+        }
   </div>
+
   <div class="my-3 text-center">
-    <button type="submit" class="btn btn-success">Se connecter</button>
+    <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success">Se connecter</button>
   </div>
 </form>
 </div>
