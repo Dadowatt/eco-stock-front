@@ -1,17 +1,24 @@
 import { Routes } from '@angular/router';
+
 import { Login } from './features/auth/login/login';
-import { authGuard } from './core/guards/auth-guard';
 import { MainLayout } from './layout/main-layout/main-layout';
+
+import { authGuard } from './core/guards/auth-guard';
 import { guestGuard } from './core/guards/guest-guard';
 
+import { ProductList } from './features/products/product-list/product-list';
+
+
 export const routes: Routes = [
+
   {
     path: 'login',
     component: Login,
-      canActivate: [
-    guestGuard
-  ]
+    canActivate: [
+      guestGuard
+    ]
   },
+
 
   {
     path: '',
@@ -21,6 +28,18 @@ export const routes: Routes = [
     ],
     children: [
 
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      },
+
+      {
+        path: 'products',
+        component: ProductList
+      }
+
     ]
   }
+
 ];
