@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+
+                    <i class="bi bi-plus-circle-fill text-success me-2"></i>
+
+                    Nouveau produit
+
+                </h2>
+
+
+                <p class="text-muted mb-0">
+
+                    Ajouter un nouveau produit au stock
+
+                </p>
+
+
+            </div>
+
+
+            <button
+                class="btn btn-outline-secondary"
+                routerLink="/products">
+
+                <i class="bi bi-arrow-left me-2"></i>
+
+                Retour
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body p-4">
+
+
+                <app-product-form
+
+                    [warehouses]="warehouses"
+
+                    (save)="saveProduct($event)">
+
+                </app-product-form>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

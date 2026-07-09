@@ -1,49 +1,65 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
-import { Product as ProductModel } from '../../../core/models/product';
 import { Product } from '../../../core/services/product';
-
 
 @Component({
   selector: 'app-product-list',
-  imports: [],
+  imports: [
+    CommonModule,
+    RouterLink
+  ],
   templateUrl: './product-list.html',
-  styleUrl: './product-list.css',
+  styleUrl: './product-list.css'
 })
 export class ProductList implements OnInit {
 
-  private productService = inject(Product);
+  productService = inject(Product);
 
-
-  products: ProductModel[] = [];
-
+  // Les Signals du service
+  products = this.productService.products;
+  loading = this.productService.loading;
+  error = this.productService.error;
 
   ngOnInit(): void {
 
-    this.loadProducts();
+    this.productService.loadProducts();
 
   }
 
+  deleteProduct(id: number): void {
 
-  loadProducts(): void {
+    const confirmation = confirm(
+      'Voulez-vous vraiment supprimer ce produit ?'
+    );
 
-    this.productService.getProducts().subscribe({
+    if (!confirmation) {
+      return;
+    }
 
-      next: (products: ProductModel[]) => {
+    this.productService.deleteProduct(id)
+      .subscribe({
 
-        this.products = products;
+        next: () => {
 
-      },
+          // Mise à jour automatique du Signal
+          this.productService.products.update(products =>
+            products.filter(product => product.id !== id)
+          );
 
+        },
 
-      error: (error: HttpErrorResponse) => {
+        error: (error) => {
 
-        console.error(error);
+          console.error(
+            'Erreur suppression produit :',
+            error
+          );
 
-      }
+        }
 
-    });
+      });
 
   }
 

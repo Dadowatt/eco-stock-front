@@ -1,0 +1,156 @@
+<form 
+    [formGroup]="productForm"
+    (ngSubmit)="submit()">
+
+
+<div class="mb-3">
+
+<label class="form-label fw-semibold">
+Nom du produit
+</label>
+
+<input
+type="text"
+class="form-control"
+formControlName="name">
+
+</div>
+
+
+
+<div class="row">
+
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label fw-semibold">
+Quantité
+</label>
+
+<input
+type="number"
+class="form-control"
+formControlName="quantity">
+
+</div>
+
+
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label fw-semibold">
+Date d'expiration
+</label>
+
+<input
+type="date"
+class="form-control"
+formControlName="expiration_date">
+
+</div>
+
+
+</div>
+
+
+
+<div class="row">
+
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label fw-semibold">
+Statut
+</label>
+
+
+<select
+class="form-select"
+formControlName="status">
+
+
+<option value="available">
+Disponible
+</option>
+
+
+<option value="reserved">
+Réservé
+</option>
+
+
+<option value="expired">
+Périmé
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<div class="col-md-6 mb-3">
+
+
+<label class="form-label fw-semibold">
+Entrepôt
+</label>
+
+
+<select
+class="form-select"
+formControlName="warehouse">
+
+
+<option [ngValue]="0">
+Sélectionner un entrepôt
+</option>
+
+
+@for(warehouse of warehouses; track warehouse.id){
+
+<option
+[value]="warehouse.id">
+
+{{ warehouse.name }}
+
+</option>
+
+}
+
+
+</select>
+
+
+</div>
+
+
+</div>
+
+
+
+<hr class="my-4">
+
+
+<div class="d-flex justify-content-end">
+
+
+<button
+type="submit"
+class="btn btn-success">
+
+
+<i class="bi bi-check-circle me-2"></i>
+
+Enregistrer
+
+
+</button>
+
+
+</div>
+
+
+</form>

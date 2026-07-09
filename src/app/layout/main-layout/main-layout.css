@@ -1,0 +1,22 @@
+.page-content {
+  min-height: calc(100vh - 56px);
+  background-color: #eef8f1;
+}
+
+.nav-link {
+  color: rgba(255,255,255,.85);
+  transition: .2s;
+}
+
+.nav-link:hover {
+  color:white;
+}
+
+.nav-link.active {
+  color:white;
+  font-weight:600;
+}
+
+.navbar-brand {
+  cursor:pointer;
+}

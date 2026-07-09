@@ -1,0 +1,49 @@
+.product-detail-card {
+
+    border-radius: 18px;
+
+}
+
+
+
+.info-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #f8f9fa;
+
+    border-radius: 15px;
+
+    height: 100%;
+
+}
+
+
+
+.icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #198754;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 1.5rem;
+
+}

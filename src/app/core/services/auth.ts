@@ -5,36 +5,36 @@ import { AuthResponse } from '../models/auth-response';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class Auth {
     private http = inject(HttpClient);
-    login(username:string, password:string): Observable<AuthResponse> {
+    login(username: string, password: string): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(
-        API.TOKEN,
-        {
-            username,
-            password
-        }
+            API.TOKEN,
+            {
+                username,
+                password
+            }
         )
 
-        .pipe(
+            .pipe(
 
-        tap(response => {
+                tap(response => {
 
-        localStorage.setItem(
-            'access_token',
-            response.access
-        );
+                    localStorage.setItem(
+                        'access_token',
+                        response.access
+                    );
 
-        localStorage.setItem(
-            'refresh_token',
-            response.refresh
-        );
+                    localStorage.setItem(
+                        'refresh_token',
+                        response.refresh
+                    );
 
-        })
+                })
 
-  );
+            );
     }
 
     getAccessToken(): string | null {
@@ -44,7 +44,7 @@ export class Auth {
 
     isAuthenticated(): boolean {
 
-    return this.getAccessToken() !== null;
+        return this.getAccessToken() !== null;
     }
 
     logout(): void {
