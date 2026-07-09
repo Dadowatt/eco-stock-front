@@ -1,1 +1,142 @@
-<p>product-move works!</p>
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content shadow">
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    <i class="bi bi-truck text-warning me-2"></i>
+
+                    Déplacer un produit
+
+                </h5>
+
+                <button type="button" class="btn-close" (click)="close.emit()">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                @if(product){
+
+                <div class="mb-3">
+
+                    <label class="text-muted small">
+                        Produit
+                    </label>
+
+                    <h5 class="fw-bold text-success mb-0">
+
+                        {{ product.name }}
+
+                    </h5>
+                    @if(product?.status === 'expired'){
+
+                    <div class="alert alert-danger mt-3">
+
+                        <i class="bi bi-x-circle me-2"></i>
+
+                        Ce produit est périmé.
+                        Le transfert est impossible.
+
+                    </div>
+
+                    }
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="text-muted small">
+
+                        Entrepôt actuel
+
+                    </label>
+
+
+                    <p class="mb-0">
+
+                        #{{ product.warehouse }}
+
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">
+                        Nouvel entrepôt
+                    </label>
+
+                    @if(warehousesLoading()){
+
+                    <div class="text-center py-3">
+
+                        <span class="spinner-border spinner-border-sm text-warning"></span>
+
+                        <p class="small text-muted mt-2 mb-0">
+
+                            Chargement des entrepôts...
+
+                        </p>
+
+                    </div>
+
+                    }
+                    @else {
+                    <select class="form-select" [(ngModel)]="selectedWarehouse">
+                        <option [ngValue]="undefined">
+                            Sélectionner un entrepôt
+                        </option>
+                        @for(warehouse of warehouses(); track warehouse.id){
+                        <option [ngValue]="warehouse.id">
+
+                            {{ warehouse.name }}
+
+                        </option>
+
+                        }
+                    </select>
+                    }
+                </div>
+                }
+
+                @if(errorMessage()){
+                <div class="alert alert-danger">
+
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+
+                    {{ errorMessage() }}
+
+                </div>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" (click)="close.emit()">
+                    Annuler
+                </button>
+                <button type="button" class="btn btn-warning" (click)="moveProduct()"
+                    [disabled]="!selectedWarehouse || loading() || !canMove()">
+
+                    @if(loading()){
+
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+
+                    }
+
+                    <i class="bi bi-truck me-2"></i>
+                    Transférer
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-backdrop fade show"></div>

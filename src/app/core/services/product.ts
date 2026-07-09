@@ -5,6 +5,7 @@ import { API } from '../config/api.config';
 import { Product as ProductModel } from '../models/product';
 import { ProductCreate } from '../models/product-create';
 import { ProductUpdate } from '../models/product-update';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,30 @@ export class Product {
 
   }
 
+  updateProductWarehouse(
+  productId: number,
+  warehouseId: number
+): void {
+
+    this.products.update(products =>
+
+      products.map(product =>
+
+        product.id === productId
+
+          ? {
+              ...product,
+              warehouse: warehouseId
+            }
+
+          : product
+
+      )
+
+    );
+
+  }
+
   getProductById(id: number): ProductModel | undefined {
 
     return this.products().find(
@@ -101,6 +126,20 @@ export class Product {
 
     return this.http.delete<void>(
       `${API.PRODUCTS}${id}/`
+    );
+
+  }
+
+  moveProduct(
+    id: number,
+    warehouse: number
+  ): Observable<any> {
+
+    return this.http.post<any>(
+      `${API.PRODUCTS}${id}/move/`,
+      {
+        warehouse
+      }
     );
 
   }

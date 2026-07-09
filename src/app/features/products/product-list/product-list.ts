@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { Product } from '../../../core/services/product';
+import { Product as ProductModel } from '../../../core/models/product';
+import { ProductMove } from '../product-move/product-move';
 
 @Component({
   selector: 'app-product-list',
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    ProductMove
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
@@ -21,6 +24,7 @@ export class ProductList implements OnInit {
   products = this.productService.products;
   loading = this.productService.loading;
   error = this.productService.error;
+  selectedProduct?: ProductModel;
 
   ngOnInit(): void {
 
@@ -60,6 +64,17 @@ export class ProductList implements OnInit {
         }
 
       });
+
+  }
+  openMove(product: ProductModel): void {
+
+    this.selectedProduct = product;
+
+  }
+
+  closeMove(): void {
+
+    this.selectedProduct = undefined;
 
   }
 

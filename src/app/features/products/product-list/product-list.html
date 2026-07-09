@@ -154,10 +154,11 @@
 
                     </button>
 
-                    <button class="btn btn-outline-warning btn-sm flex-fill">
-
-                        <i class="bi bi-truck"></i>
-
+                    <button
+                    class="btn btn-outline-warning btn-sm flex-fill"
+                    (click)="openMove(product)"
+                    title="Déplacer le produit">
+                    <i class="bi bi-truck"></i>
                     </button>
 
                     <button
@@ -193,5 +194,16 @@
     </h5>
 
 </div>
+
+}
+@if(selectedProduct){
+
+    <app-product-move
+
+        [product]="selectedProduct"
+
+        (close)="closeMove()">
+
+    </app-product-move>
 
 }
