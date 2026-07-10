@@ -27,9 +27,7 @@
             </div>
 
 
-            <button
-                class="btn btn-outline-secondary"
-                routerLink="/products">
+            <button class="btn btn-outline-secondary" routerLink="/products">
 
                 <i class="bi bi-arrow-left me-2"></i>
 
@@ -47,11 +45,7 @@
             <div class="card-body p-4">
 
 
-                <app-product-form
-
-                    [warehouses]="warehouses"
-
-                    (save)="saveProduct($event)">
+                <app-product-form [warehouses]="warehouses" (save)="saveProduct($event)">
 
                 </app-product-form>
 

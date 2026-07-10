@@ -18,110 +18,45 @@ import { WarehouseCreate as WarehouseCreateModel } from '../../../core/models/wa
 })
 export class WarehouseCreate {
 
-
   private warehouseService = inject(Warehouse);
-
   private router = inject(Router);
-
-
-
   warehouse: WarehouseCreateModel = {
-
       name:'',
-
       location:'',
-
       capacity:0
-
   };
 
-
-
   loading = false;
-
-
-
   error = '';
-
-
-
   createWarehouse(): void {
-
-
     this.loading = true;
-
     this.error = '';
-
-
 
     this.warehouseService
       .createWarehouse(this.warehouse)
       .subscribe({
-
-
         next: (warehouse) => {
 
-
-
-          // Mise à jour du Signal
-
           this.warehouseService.warehouses.update(
-
             warehouses => [
-
               ...warehouses,
-
               warehouse
-
             ]
-
           );
-
-
-
           this.router.navigate(['/warehouses']);
-
-
-
         },
-
-
         error: (err) => {
-
-
           console.error(err);
-
-
           this.error =
             "Impossible de créer l'entrepôt.";
-
-
           this.loading = false;
-
-
         },
-
-
         complete: () => {
-
           this.loading = false;
-
         }
-
-
       });
-
-
-
   }
-
-
-
   cancel(): void {
-
     this.router.navigate(['/warehouses']);
-
   }
-
-
 }

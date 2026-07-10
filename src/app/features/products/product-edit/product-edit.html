@@ -27,9 +27,7 @@
             </div>
 
 
-            <button
-                class="btn btn-outline-secondary"
-                routerLink="/products">
+            <button class="btn btn-outline-secondary" routerLink="/products">
 
 
                 <i class="bi bi-arrow-left me-2"></i>
@@ -53,15 +51,9 @@
                 @if(product) {
 
 
-                    <app-product-form
+                <app-product-form [product]="product" [warehouses]="warehouses" (save)="updateProduct($event)">
 
-                        [product]="product"
-
-                        [warehouses]="warehouses"
-
-                        (save)="updateProduct($event)">
-
-                    </app-product-form>
+                </app-product-form>
 
 
                 }
@@ -69,20 +61,20 @@
                 @else {
 
 
-                    <div class="text-center py-5">
+                <div class="text-center py-5">
 
 
-                        <div class="spinner-border text-success"></div>
+                    <div class="spinner-border text-success"></div>
 
 
-                        <p class="text-muted mt-3">
+                    <p class="text-muted mt-3">
 
-                            Chargement du produit...
+                        Chargement du produit...
 
-                        </p>
+                    </p>
 
 
-                    </div>
+                </div>
 
 
                 }

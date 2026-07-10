@@ -6,4 +6,6 @@ export interface Warehouse {
     location:string;
 
     capacity:number;
+    
+    total_products?: number;
 }

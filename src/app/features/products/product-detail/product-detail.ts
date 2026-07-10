@@ -33,8 +33,6 @@ export class ProductDetail implements OnInit {
       this.route.snapshot.paramMap.get('id')
     );
 
-
-    // On cherche d'abord dans le Signal
     const existingProduct =
       this.productService.getProductById(id);
 
@@ -47,13 +45,9 @@ export class ProductDetail implements OnInit {
 
     }
 
-
-    // Sinon on charge depuis l'API
     this.loadProduct(id);
 
   }
-
-
 
   loadProduct(id: number): void {
 
@@ -66,8 +60,6 @@ export class ProductDetail implements OnInit {
 
           this.product = product;
 
-
-          // On ajoute aussi le produit dans le Signal
           this.productService.products.update(products => {
 
             const exists =

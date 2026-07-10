@@ -1,237 +1,84 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-
     <div>
-
         <h2 class="fw-bold mb-1">
-
             <i class="bi bi-pencil-square text-success me-2"></i>
-
             Modifier l'entrepôt
-
         </h2>
-
-
         <p class="text-muted mb-0">
-
             Mise à jour des informations de stockage
-
         </p>
-
-
     </div>
-
 </div>
-
-
 
 @if(error) {
-
 <div class="alert alert-danger">
-
     {{ error }}
-
 </div>
-
 }
 
-
-
 @if(warehouse) {
-
-
 <div class="card warehouse-form-card shadow-sm border-0">
-
-
     <div class="card-body p-4">
 
-
         <form (ngSubmit)="updateWarehouse()">
-
-
-
             <div class="mb-3">
-
-
                 <label class="form-label fw-semibold">
-
                     Nom de l'entrepôt
-
                 </label>
 
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-building"></i>
-
                     </span>
-
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        [(ngModel)]="form.name"
-                        required>
-
-
+                    <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="mb-3">
-
-
                 <label class="form-label fw-semibold">
-
                     Localisation
-
                 </label>
 
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-geo-alt"></i>
-
                     </span>
-
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="location"
-                        [(ngModel)]="form.location"
-                        required>
-
-
+                    <input type="text" class="form-control" name="location" [(ngModel)]="form.location" required>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="mb-4">
-
-
                 <label class="form-label fw-semibold">
-
                     Capacité
-
                 </label>
-
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-box-seam"></i>
-
                     </span>
-
-
-                    <input
-                        type="number"
-                        class="form-control"
-                        name="capacity"
-                        [(ngModel)]="form.capacity"
-                        min="1"
+                    <input type="number" class="form-control" name="capacity" [(ngModel)]="form.capacity" min="1"
                         required>
-
-
                 </div>
-
-
             </div>
-
-
-
 
             <div class="d-flex gap-2">
-
-
-
-                <button
-                    type="submit"
-                    class="btn btn-success"
-                    [disabled]="loading">
-
-
-
+                <button type="submit" class="btn btn-success" [disabled]="loading">
                     @if(loading) {
-
-
                     <span class="spinner-border spinner-border-sm me-2">
                     </span>
-
-
                     Enregistrement...
-
-
-
                     }
-
                     @else {
-
-
                     <i class="bi bi-check-circle me-2"></i>
-
-
                     Modifier
-
-
-
                     }
-
-
                 </button>
 
-
-
-
-
-                <button
-                    type="button"
-                    class="btn btn-outline-secondary"
-                    (click)="cancel()">
-
-
-
+                <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
                     <i class="bi bi-x-circle me-2"></i>
-
-
                     Annuler
-
-
-
                 </button>
-
-
-
-
             </div>
-
-
-
         </form>
-
-
-
     </div>
-
-
 </div>
-
-
 }

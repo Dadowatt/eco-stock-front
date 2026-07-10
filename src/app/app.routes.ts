@@ -30,49 +30,49 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
 
-  {
-    path: '',
-    redirectTo: 'products',
-    pathMatch: 'full'
-  },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      },
 
-  {
-    path: 'products',
-    component: ProductList
-  },
+      {
+        path: 'products',
+        component: ProductList
+      },
 
-  {
-    path: 'products/new',
-    component: ProductCreate
-  },
+      {
+        path: 'products/new',
+        component: ProductCreate
+      },
 
-  {
-    path: 'products/:id/edit',
-    component: ProductEdit
-  },
+      {
+        path: 'products/:id/edit',
+        component: ProductEdit
+      },
 
-  {
-    path: 'products/:id',
-    component: ProductDetail
-  },
-  {
-    path: 'warehouses',
-    component: WarehouseList
-  },
-  {
-  path: 'warehouses/new',
-    component: WarehouseCreate
-  },
-  {
-  path: 'warehouses/:id/edit',
-    component: WarehouseEdit
-  },
-  {
-  path: 'warehouses/:id',
-    component: WarehouseDetail
-  }
+      {
+        path: 'products/:id',
+        component: ProductDetail
+      },
+      {
+        path: 'warehouses',
+        component: WarehouseList
+      },
+      {
+        path: 'warehouses/new',
+        component: WarehouseCreate
+      },
+      {
+        path: 'warehouses/:id/edit',
+        component: WarehouseEdit
+      },
+      {
+        path: 'warehouses/:id',
+        component: WarehouseDetail
+      }
 
-]
+    ]
 
   }
 

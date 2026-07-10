@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 
 import { API } from '../config/api.config';
 import { Warehouse as WarehouseModel } from '../models/warehouse';
@@ -43,24 +43,42 @@ export class Warehouse {
     this.http.get<WarehouseModel[]>(API.WAREHOUSES)
       .subscribe({
 
-        next: warehouses => {
+next: warehouses => {
 
-          this.warehouses.set(warehouses);
-          this.loading.set(false);
+  const requests = warehouses.map(warehouse =>
+    this.auditWarehouse(warehouse.id)
+  );
 
-        },
+  forkJoin(requests).subscribe({
 
-        error: err => {
+      next: audits => {
 
-          console.error(err);
+        const warehousesWithAudit = warehouses.map(
+          (warehouse, index) => ({
+            ...warehouse,
+            total_products: audits[index]
+          })
+        );
 
-          this.error.set(
-            'Impossible de charger les entrepôts.'
-          );
+        this.warehouses.set(warehousesWithAudit);
 
-          this.loading.set(false);
+        this.loading.set(false);
 
-        }
+      },
+
+      error: err => {
+
+        console.error(err);
+
+        this.error.set("Impossible de charger les audits.");
+
+        this.loading.set(false);
+
+      }
+
+    });
+
+  },
 
       });
 
@@ -85,6 +103,18 @@ export class Warehouse {
     );
 
   }
+
+  auditWarehouse(id: number): Observable<number> {
+
+  return this.http
+    .get<{ total_products: number }>(
+      `${API.WAREHOUSES}${id}/audit/`
+    )
+    .pipe(
+      map(response => response.total_products)
+    );
+
+}
 
   createWarehouse(
     warehouse: WarehouseCreate

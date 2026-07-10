@@ -22,90 +22,45 @@ from '../../../core/models/warehouse-update';
   styleUrl: './warehouse-edit.css',
 })
 export class WarehouseEdit implements OnInit {
-
-
   private warehouseService = inject(WarehouseService);
 
   private route = inject(ActivatedRoute);
 
   private router = inject(Router);
 
-
-
   // Warehouse complet récupéré depuis l'API
   warehouse!: WarehouseModel;
-
-
 
   // Données envoyées au PUT
   form!: WarehouseUpdateModel;
 
-
-
   loading = false;
-
   error = '';
 
-
-
   ngOnInit(): void {
-
-
     const id = Number(
       this.route.snapshot.paramMap.get('id')
     );
 
-
-
     const existingWarehouse =
       this.warehouseService.getWarehouseById(id);
-
-
-
     if (existingWarehouse) {
-
-
       this.setWarehouse(existingWarehouse);
-
-
-
     } else {
-
-
       this.warehouseService
         .getWarehouse(id)
         .subscribe({
-
-
           next: warehouse => {
-
-
             this.setWarehouse(warehouse);
-
-
           },
 
-
           error: err => {
-
-
             console.error(err);
-
-
             this.error =
             "Impossible de charger l'entrepôt.";
-
-
           }
-
-
         });
-
-
-
     }
-
-
   }
 
 

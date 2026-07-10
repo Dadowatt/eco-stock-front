@@ -28,9 +28,7 @@
     <div class="d-flex gap-2">
 
 
-        <button
-            class="btn btn-outline-secondary"
-            routerLink="/products">
+        <button class="btn btn-outline-secondary" routerLink="/products">
 
 
             <i class="bi bi-arrow-left me-2"></i>
@@ -42,9 +40,7 @@
 
 
 
-        <button
-            class="btn btn-success"
-            [routerLink]="['/products', product.id, 'edit']">
+        <button class="btn btn-success" [routerLink]="['/products', product.id, 'edit']">
 
 
             <i class="bi bi-pencil me-2"></i>
@@ -224,33 +220,33 @@
 
                             @if(product.status === 'available'){
 
-                                <span class="badge bg-success fs-6">
+                            <span class="badge bg-success fs-6">
 
-                                    Disponible
+                                Disponible
 
-                                </span>
+                            </span>
 
                             }
 
 
                             @if(product.status === 'reserved'){
 
-                                <span class="badge bg-warning text-dark fs-6">
+                            <span class="badge bg-warning text-dark fs-6">
 
-                                    Réservé
+                                Réservé
 
-                                </span>
+                            </span>
 
                             }
 
 
                             @if(product.status === 'expired'){
 
-                                <span class="badge bg-danger fs-6">
+                            <span class="badge bg-danger fs-6">
 
-                                    Périmé
+                                Périmé
 
-                                </span>
+                            </span>
 
                             }
 

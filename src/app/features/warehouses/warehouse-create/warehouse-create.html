@@ -1,218 +1,81 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-
     <div>
-
         <h2 class="fw-bold mb-1">
-
             <i class="bi bi-building-fill text-success me-2"></i>
-
             Nouvel entrepôt
-
         </h2>
-
-
         <p class="text-muted mb-0">
-
             Ajouter un nouvel espace de stockage
-
         </p>
-
     </div>
-
 </div>
 
-
-
 <div class="card warehouse-form-card shadow-sm border-0">
-
-
     <div class="card-body p-4">
-
-
         @if(error) {
-
-            <div class="alert alert-danger">
-
-                {{ error }}
-
-            </div>
-
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
         }
 
-
-
         <form (ngSubmit)="createWarehouse()">
-
-
-
             <div class="mb-3">
-
-
                 <label class="form-label fw-semibold">
-
                     Nom de l'entrepôt
-
                 </label>
-
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-building"></i>
-
                     </span>
-
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        [(ngModel)]="warehouse.name"
-                        placeholder="Ex: Entrepôt Central"
-                        required>
-
-
+                    <input type="text" class="form-control" name="name" [(ngModel)]="warehouse.name"
+                        placeholder="Ex: Entrepôt Central" required>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="mb-3">
-
-
                 <label class="form-label fw-semibold">
-
                     Localisation
-
                 </label>
-
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-geo-alt"></i>
-
                     </span>
-
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="location"
-                        [(ngModel)]="warehouse.location"
-                        placeholder="Ex: Douala"
-                        required>
-
-
+                    <input type="text" class="form-control" name="location" [(ngModel)]="warehouse.location"
+                        placeholder="Ex: Douala" required>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="mb-4">
-
-
                 <label class="form-label fw-semibold">
-
                     Capacité
-
                 </label>
-
-
                 <div class="input-group">
-
-
                     <span class="input-group-text">
-
                         <i class="bi bi-box-seam"></i>
-
                     </span>
-
-
-                    <input
-                        type="number"
-                        class="form-control"
-                        name="capacity"
-                        [(ngModel)]="warehouse.capacity"
-                        placeholder="Ex: 5000"
-                        min="1"
-                        required>
-
-
+                    <input type="number" class="form-control" name="capacity" [(ngModel)]="warehouse.capacity"
+                        placeholder="Ex: 5000" min="1" required>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="d-flex gap-2">
-
-
-                <button
-                    type="submit"
-                    class="btn btn-success"
-                    [disabled]="loading">
-
-
+                <button type="submit" class="btn btn-success" [disabled]="loading">
                     @if(loading) {
-
-                        <span
-                            class="spinner-border spinner-border-sm me-2">
-                        </span>
-
-                        Création...
-
+                    <span class="spinner-border spinner-border-sm me-2">
+                    </span>
+                    Création...
                     }
-
                     @else {
-
-                        <i class="bi bi-check-circle me-2"></i>
-
-                        Créer
-
+                    <i class="bi bi-check-circle me-2"></i>
+                    Créer
                     }
-
-
                 </button>
 
-
-
-
-                <button
-                    type="button"
-                    class="btn btn-outline-secondary"
-                    (click)="cancel()">
-
-
+                <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
                     <i class="bi bi-x-circle me-2"></i>
-
                     Annuler
-
-
                 </button>
-
-
-
             </div>
-
-
-
         </form>
-
-
     </div>
-
-
 </div>
