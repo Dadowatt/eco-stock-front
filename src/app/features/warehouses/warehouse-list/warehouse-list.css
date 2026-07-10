@@ -1,0 +1,81 @@
+.warehouse-card {
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:white;
+
+    transition:.25s ease;
+
+}
+
+
+.warehouse-card:hover {
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 12px 30px rgba(25,135,84,.15)!important;
+
+}
+
+
+
+.warehouse-card h5 {
+
+    max-width:70%;
+
+}
+
+
+
+.warehouse-info p {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#555;
+
+}
+
+
+
+.warehouse-info i {
+
+    width:20px;
+
+    color:#198754;
+
+}
+
+
+
+.badge {
+
+    padding:.6rem .8rem;
+
+    border-radius:20px;
+
+}
+
+
+
+.card-footer {
+
+    padding:1rem;
+
+}
+
+
+
+.card-footer button {
+
+    border-radius:10px;
+
+}

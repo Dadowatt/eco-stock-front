@@ -1,0 +1,148 @@
+@if(loading) {
+
+
+<div class="text-center py-5">
+
+    <div class="spinner-border text-success"></div>
+
+    <p class="text-muted mt-3">
+        Chargement...
+    </p>
+
+</div>
+
+
+}
+
+
+@else if(error) {
+
+
+<div class="alert alert-danger">
+
+    {{ error }}
+
+</div>
+
+
+}
+
+
+@else if(warehouse) {
+
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+    <div>
+
+
+        <h2 class="fw-bold mb-1">
+
+            <i class="bi bi-building-fill text-success me-2"></i>
+
+            {{ warehouse.name }}
+
+        </h2>
+
+
+        <p class="text-muted">
+
+            Détails de l'entrepôt
+
+        </p>
+
+
+    </div>
+
+
+    <a
+        class="btn btn-success"
+        [routerLink]="['/warehouses', warehouse.id, 'edit']">
+
+
+        <i class="bi bi-pencil me-2"></i>
+
+        Modifier
+
+
+    </a>
+
+
+</div>
+
+
+
+
+<div class="card warehouse-detail-card shadow-sm border-0">
+
+
+    <div class="card-body p-4">
+
+
+        <div class="warehouse-info">
+
+
+            <p>
+
+                <i class="bi bi-hash"></i>
+
+                <strong>ID :</strong>
+
+                #{{ warehouse.id }}
+
+            </p>
+
+
+
+            <p>
+
+                <i class="bi bi-geo-alt-fill"></i>
+
+                <strong>Localisation :</strong>
+
+                {{ warehouse.location }}
+
+            </p>
+
+
+
+            <p>
+
+                <i class="bi bi-box-seam-fill"></i>
+
+                <strong>Capacité :</strong>
+
+                {{ warehouse.capacity }}
+                unités
+
+            </p>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+<a
+    routerLink="/warehouses"
+    class="btn btn-outline-secondary mt-4">
+
+
+    <i class="bi bi-arrow-left me-2"></i>
+
+    Retour
+
+
+</a>
+
+
+}

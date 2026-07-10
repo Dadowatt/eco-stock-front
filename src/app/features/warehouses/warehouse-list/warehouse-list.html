@@ -1,0 +1,308 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 class="fw-bold mb-1">
+
+            <i class="bi bi-building-fill text-success me-2"></i>
+
+            Entrepôts
+
+        </h2>
+
+
+        <p class="text-muted mb-0">
+
+            Gestion des zones de stockage
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="btn btn-success shadow-sm"
+        routerLink="/warehouses/new">
+
+
+        <i class="bi bi-plus-circle me-2"></i>
+
+        Ajouter
+
+
+    </button>
+
+
+</div>
+
+
+
+@if (loading()) {
+
+
+<div class="text-center py-5">
+
+
+    <div class="spinner-border text-success" role="status">
+
+
+        <span class="visually-hidden">
+
+            Chargement...
+
+        </span>
+
+
+    </div>
+
+
+    <p class="text-muted mt-3">
+
+        Chargement des entrepôts...
+
+    </p>
+
+
+</div>
+
+
+}
+
+
+
+@else if (warehouses().length > 0) {
+
+
+
+<div class="row g-4">
+
+
+@for (warehouse of warehouses(); track warehouse.id) {
+
+
+<div class="col-12 col-md-6 col-xl-4">
+
+
+    <div class="card warehouse-card h-100 shadow-sm">
+
+
+
+        <div class="card-body">
+
+
+
+            <div class="d-flex justify-content-between align-items-start">
+
+
+
+                <h5 class="fw-bold text-success">
+
+
+                    <i class="bi bi-building-fill me-2"></i>
+
+
+                    {{ warehouse.name }}
+
+
+                </h5>
+
+
+
+                <span class="badge bg-success">
+
+
+                    #{{ warehouse.id }}
+
+
+                </span>
+
+
+
+            </div>
+
+
+
+            <hr>
+
+
+
+            <div class="warehouse-info">
+
+
+
+                <p>
+
+
+                    <i class="bi bi-geo-alt-fill"></i>
+
+
+                    <strong>
+
+                        Localisation :
+
+                    </strong>
+
+
+                    {{ warehouse.location }}
+
+
+
+                </p>
+
+
+
+
+                <p>
+
+
+                    <i class="bi bi-box-seam-fill"></i>
+
+
+                    <strong>
+
+                        Capacité :
+
+                    </strong>
+
+
+                    {{ warehouse.capacity }}
+
+                    unités
+
+
+
+                </p>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="card-footer bg-white border-0">
+
+
+
+            <div class="d-flex gap-2">
+
+
+
+                <button
+                    class="btn btn-outline-primary btn-sm flex-fill"
+                    [routerLink]="['/warehouses', warehouse.id]">
+
+
+                    <i class="bi bi-eye"></i>
+
+
+
+                </button>
+
+
+
+
+                <button
+                    class="btn btn-outline-success btn-sm flex-fill"
+                    [routerLink]="['/warehouses', warehouse.id, 'edit']">
+
+
+                    <i class="bi bi-pencil"></i>
+
+
+
+                </button>
+
+
+
+
+                <button
+                    class="btn btn-outline-danger btn-sm flex-fill"
+                    (click)="deleteWarehouse(warehouse.id)">
+
+
+                    <i class="bi bi-trash"></i>
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+}
+
+
+
+</div>
+
+
+
+}
+
+
+
+
+@else {
+
+
+
+<div class="text-center py-5">
+
+
+    <i class="bi bi-building display-4 text-muted"></i>
+
+
+
+    <h5 class="mt-3 text-muted">
+
+        Aucun entrepôt trouvé
+
+    </h5>
+
+
+
+    <p class="text-muted">
+
+        Commencez par créer votre premier entrepôt.
+
+    </p>
+
+
+
+    <button
+        class="btn btn-success"
+        routerLink="/warehouses/new">
+
+
+        <i class="bi bi-plus-circle me-2"></i>
+
+        Ajouter un entrepôt
+
+
+    </button>
+
+
+</div>
+
+
+}
