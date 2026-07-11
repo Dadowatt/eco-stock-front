@@ -1,0 +1,381 @@
+.login-page {
+
+    min-height: 100vh;
+
+    background: #EEF8F1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    overflow: hidden;
+
+}
+
+
+/* Container principal */
+
+.row {
+
+    width: 1100px;
+
+    max-width: 100%;
+
+    height: 650px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,.10);
+
+}
+
+
+
+/* Partie gauche image */
+
+.left-side {
+
+    height: 650px;
+
+}
+
+
+
+.left-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+
+/* Partie droite */
+
+.right-side {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    background: white;
+
+    padding: 30px;
+
+}
+
+
+
+/* Carte login */
+
+.login-card {
+
+    width: 390px;
+
+    background: white;
+
+    padding: 35px;
+
+}
+
+
+
+/* Logo */
+
+.logo-box {
+
+    width: 62px;
+
+    height: 62px;
+
+    margin: 0 auto 20px;
+
+    background: #dff5e8;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.logo-box i {
+
+    color: #16a34a;
+
+    font-size: 30px;
+
+}
+
+
+
+/* Titres */
+
+h2 {
+
+    text-align: center;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+.subtitle {
+
+    text-align: center;
+
+    color: #7d7d7d;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* Formulaire */
+
+.form-label {
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+.input-group-text {
+
+    background: white;
+
+    border-right: none;
+
+}
+
+
+
+.form-control {
+
+    border-left: none;
+
+    height: 46px;
+
+}
+
+
+
+.form-control:focus {
+
+    box-shadow: none;
+
+    border-color: #ced4da;
+
+}
+
+
+
+/* Bouton */
+
+.login-btn {
+
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    height: 48px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    transition: .2s;
+
+}
+
+
+
+.login-btn:hover {
+
+    background: #11863c;
+
+}
+
+
+
+/* Séparation */
+
+hr {
+
+    margin: 25px 0;
+
+}
+
+
+
+/* Sécurité */
+
+.secure {
+
+    text-align: center;
+
+    color: #9a9a9a;
+
+    font-size: 13px;
+
+}
+
+
+.secure i {
+
+    margin-right: 6px;
+
+}
+
+
+
+/* Copyright */
+
+.copyright {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    color: #9c9c9c;
+
+    font-size: 13px;
+
+}
+
+
+
+/* Responsive */
+
+@media(max-width: 991px) {
+
+
+    .login-page {
+
+        padding: 15px;
+
+    }
+
+
+    .row {
+
+        height: auto;
+
+        min-height: auto;
+
+    }
+
+
+    .left-side {
+
+        display: none;
+
+    }
+
+
+    .right-side {
+
+        padding: 20px;
+
+    }
+
+
+    .login-card {
+
+        width: 100%;
+
+        padding: 30px;
+
+    }
+
+
+}
+
+
+
+/* Petits écrans en hauteur */
+
+@media(max-height: 750px) {
+
+
+    .row {
+
+        height: 580px;
+
+    }
+
+
+    .left-side {
+
+        height: 580px;
+
+    }
+
+
+    .login-card {
+
+        padding: 25px;
+
+    }
+
+
+    .logo-box {
+
+        width: 55px;
+
+        height: 55px;
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .logo-box i {
+
+        font-size: 26px;
+
+    }
+
+
+    .subtitle {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    hr {
+
+        margin: 18px 0;
+
+    }
+
+}

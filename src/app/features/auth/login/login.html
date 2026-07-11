@@ -1,27 +1,124 @@
-<div class="container mt-5">
+<div class="login-page">
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-50 mx-auto bg-white p-5 rounded shadow">
+  <div class="row g-0 h-100">
 
-    <h2 class="text-center text-success">Eco Stock</h2>
+    <div class="col-lg-6 d-none d-lg-block left-side">
+      <img
+        src="warehouse.png"
+        alt="Warehouse"
+        class="left-image">
+    </div>
 
-  <div class="mb-3">
-    <label for="" class="form-label">Nom d'utilisateur</label>
-    <input type="email" class="form-control" [class.is-invalid]="username.invalid && username.touched" formControlName="username" placeholder="Votre username">
-    @if (username.invalid && username.touched) {
-        <small class="invalid-feedback">Le nom utilisateur est obligatoire.</small>
-        }
+    <div class="col-lg-6 col-12 right-side">
+
+      <div class="login-card">
+
+        <div class="logo-box">
+          <i class="bi bi-box-seam-fill"></i>
+        </div>
+
+        <h2>Eco Stock</h2>
+
+        <p class="subtitle">
+          Gestion des stocks d'entreprise
+        </p>
+
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()">
+
+          <div class="mb-4">
+
+            <label class="form-label">
+              Nom d'utilisateur
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text">
+                <i class="bi bi-person"></i>
+              </span>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+                placeholder="Votre nom d'utilisateur">
+
+            </div>
+
+            @if(username.invalid && username.touched){
+
+            <small class="text-danger">
+              Nom d'utilisateur obligatoire
+            </small>
+
+            }
+
+          </div>
+
+          <div class="mb-4">
+
+            <label class="form-label">
+              Mot de passe
+            </label>
+
+            <div class="input-group">
+
+              <span class="input-group-text">
+                <i class="bi bi-lock"></i>
+              </span>
+
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="Votre Mot de passe">
+
+            </div>
+
+            @if(password.invalid && password.touched){
+
+            <small class="text-danger">
+              Mot de passe obligatoire
+            </small>
+
+            }
+
+          </div>
+
+          <button
+            type="submit"
+            class="btn login-btn w-100"
+            [disabled]="loginForm.invalid">
+
+            Se Connecter
+            <i class="bi bi-arrow-right ms-2"></i>
+
+          </button>
+
+        </form>
+
+        <hr>
+
+        <div class="secure">
+
+          <i class="bi bi-shield-lock"></i>
+
+          Accès sécurisé à l'entreprise
+
+        </div>
+
+      </div>
+
+      <div class="copyright">
+
+        &copy; 2026 Eco Stock
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="mb-3">
-    <label for="" class="form-label">Mot de passe</label>
-    <input type="password" class="form-control" [class.is-invalid]="password.invalid && password.touched" formControlName="password" placeholder="Votre mot de passe">
-        @if (password.invalid && password.touched) {
-        <small class="invalid-feedback">Le mot de passe est obligatoire.</small>
-        }
-  </div>
-
-  <div class="my-3 text-center">
-    <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success">Se connecter</button>
-  </div>
-</form>
 </div>
