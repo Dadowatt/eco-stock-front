@@ -71,13 +71,27 @@ src/app/
 ├── core/
 │   ├── config/
 │   │   └── api.config.ts
+│   │
 │   ├── guards/
 │   │   ├── auth-guard.ts
 │   │   └── guest-guard.ts
+│   │
 │   ├── interceptors/
 │   │   └── jwt-interceptor.ts
+│   │
 │   ├── models/
+│   │   ├── auth-response.ts
+│   │   ├── product.ts
+│   │   ├── product-create.ts
+│   │   ├── product-update.ts
+│   │   ├── warehouse.ts
+│   │   ├── warehouse-create.ts
+│   │   └── warehouse-update.ts
+│   │
 │   └── services/
+│       ├── auth.ts
+│       ├── product.ts
+│       └── warehouse.ts
 │
 ├── features/
 │   ├── auth/
@@ -91,6 +105,10 @@ src/app/
 │   │   └── product-move/
 │   │
 │   └── warehouses/
+│       ├── warehouse-list/
+│       ├── warehouse-create/
+│       ├── warehouse-detail/
+│       └── warehouse-edit/
 │
 ├── layout/
 │   └── main-layout/
