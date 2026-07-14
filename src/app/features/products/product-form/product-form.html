@@ -1,138 +1,78 @@
 <form [formGroup]="productForm" (ngSubmit)="submit()">
 
-
     <div class="mb-3">
-
-        <label class="form-label fw-semibold">
-            Nom du produit
-        </label>
-
+        <label class="form-label fw-semibold">Nom du produit</label>
         <input type="text" class="form-control" formControlName="name">
-
+        @if(name.hasError('required') && name.touched) {
+            <small class="text-danger">
+                Le nom du produit est obligatoire.
+            </small>
+        }
+        @if(name.hasError('minlength') && name.touched) {
+            <small class="text-danger">Le nom doit contenir au moins 2 caractères.</small>
+        }
     </div>
 
-
-
     <div class="row">
-
-
         <div class="col-md-6 mb-3">
-
-            <label class="form-label fw-semibold">
-                Quantité
-            </label>
-
+            <label class="form-label fw-semibold">Quantité</label>
             <input type="number" class="form-control" formControlName="quantity">
-
+            @if(quantity.invalid && quantity.touched) {
+                <small class="text-danger">La quantité est obligatoire.</small>
+            }
         </div>
-
-
 
         <div class="col-md-6 mb-3">
-
-            <label class="form-label fw-semibold">
-                Date d'expiration
-            </label>
-
+            <label class="form-label fw-semibold">Date d'expiration</label>
             <input type="date" class="form-control" formControlName="expiration_date">
-
+            @if(expirationDate.invalid && expirationDate.touched) {
+                <small class="text-danger">La date d'expiration est obligatoire.</small>
+            }
         </div>
-
-
     </div>
 
-
-
     <div class="row">
-
-
         <div class="col-md-6 mb-3">
-
-            <label class="form-label fw-semibold">
-                Statut
-            </label>
-
-
+            <label class="form-label fw-semibold">Statut</label>
             <select class="form-select" formControlName="status">
 
-
-                <option value="available">
-                    Disponible
-                </option>
-
-
-                <option value="reserved">
-                    Réservé
-                </option>
-
-
-                <option value="expired">
+                <option value="available">Disponible</option>
+                <option value="reserved">Réservé</option>
+                <option
+                    value="expired"
+                    [disabled]="productForm.get('status')?.enabled">
                     Périmé
                 </option>
 
-
             </select>
-
-
         </div>
-
-
 
         <div class="col-md-6 mb-3">
-
-
-            <label class="form-label fw-semibold">
-                Entrepôt
-            </label>
-
-
+            <label class="form-label fw-semibold">Entrepôt</label>
             <select class="form-select" formControlName="warehouse">
 
-
-                <option [ngValue]="0">
-                    Sélectionner un entrepôt
-                </option>
-
+                <option [ngValue]="0">Sélectionner un entrepôt</option>
 
                 @for(warehouse of warehouses; track warehouse.id){
-
-                <option [value]="warehouse.id">
-
+                    <option [value]="warehouse.id">
                     {{ warehouse.name }}
-
-                </option>
-
+                    </option>
                 }
-
-
             </select>
-
-
+            @if(warehouse.invalid && warehouse.touched) {
+                    <small class="text-danger">
+                        Veuillez sélectionner un entrepôt.
+                    </small>
+                }
         </div>
-
-
     </div>
-
-
 
     <hr class="my-4">
 
-
     <div class="d-flex justify-content-end">
-
-
         <button type="submit" class="btn btn-success">
-
-
             <i class="bi bi-check-circle me-2"></i>
-
             Enregistrer
-
-
         </button>
-
-
     </div>
-
-
 </form>

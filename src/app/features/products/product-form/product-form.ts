@@ -31,32 +31,33 @@ import { ProductCreate } from '../../../core/models/product-create';
 })
 export class ProductForm implements OnInit {
 
-
   private fb = inject(NonNullableFormBuilder);
-
 
   @Input()
   warehouses: WarehouseModel[] = [];
 
-
   @Input()
   product?: ProductModel;
 
-
   @Output()
   save = new EventEmitter<ProductCreate>();
-
 
   productForm = this.fb.group({
 
     name: [
       '',
-      Validators.required
+      [
+        Validators.required,
+        Validators.minLength(2)
+      ]
     ],
 
     quantity: [
       1,
-      Validators.required
+      [
+        Validators.required,
+        Validators.min(1)
+      ]
     ],
 
     expiration_date: [
@@ -71,12 +72,30 @@ export class ProductForm implements OnInit {
 
     warehouse: [
       0,
-      Validators.required
+      [Validators.min(1)]
     ]
 
   });
 
+  get name() {
+  return this.productForm.controls.name;
+  }
 
+  get quantity() {
+    return this.productForm.controls.quantity;
+  }
+
+  get expirationDate() {
+    return this.productForm.controls.expiration_date;
+  }
+
+  get status() {
+    return this.productForm.controls.status;
+  }
+
+  get warehouse() {
+    return this.productForm.controls.warehouse;
+  }
 
   ngOnInit(): void {
 
@@ -98,10 +117,50 @@ export class ProductForm implements OnInit {
       });
 
     }
+    this.productForm.get('expiration_date')?.valueChanges.subscribe(() => {
+    this.updateStatusAccordingToDate();
+  });
 
   }
 
+  updateStatusAccordingToDate(): void {
 
+    const expirationDate = this.productForm.get('expiration_date')?.value;
+
+    if (!expirationDate) {
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const expiration = new Date(expirationDate);
+    expiration.setHours(0, 0, 0, 0);
+
+    const statusControl = this.productForm.get('status');
+
+    if (!statusControl) {
+      return;
+    }
+
+    if (expiration < today) {
+
+      // Produit expiré
+      statusControl.setValue('expired');
+      statusControl.disable();
+
+    } else {
+
+      // Produit non expiré
+      statusControl.enable();
+
+      if (statusControl.value === 'expired') {
+        statusControl.setValue('available');
+      }
+
+    }
+
+}
 
   submit(): void {
 
@@ -114,6 +173,18 @@ export class ProductForm implements OnInit {
 
     }
 
+    const product = this.productForm.getRawValue();
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const expiration = new Date(product.expiration_date);
+    expiration.setHours(0,0,0,0);
+
+    if (expiration >= today && product.status === 'expired') {
+      alert("Un produit non expiré ne peut pas avoir le statut 'Périmé'.");
+      return;
+    }
 
     this.save.emit(
       this.productForm.getRawValue()
