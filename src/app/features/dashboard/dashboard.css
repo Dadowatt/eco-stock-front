@@ -1,0 +1,85 @@
+.dashboard-header {
+  animation: fadeIn .4s ease;
+}
+
+
+.stat-card {
+
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  border-top: 4px solid;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+
+  transition: all .2s ease;
+
+}
+
+
+.stat-card:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+
+}
+
+
+.stat-icon {
+
+  width: 55px;
+
+  height: 55px;
+
+  border-radius: 50%;
+
+  background-color: #f8f9fa;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:1.7rem;
+
+}
+
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity:0;
+
+    transform:translateY(10px);
+
+  }
+
+  to {
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+.chart-container {
+
+  max-width: 450px;
+
+  margin: auto;
+
+}

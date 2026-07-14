@@ -14,6 +14,8 @@ import { WarehouseList } from './features/warehouses/warehouse-list/warehouse-li
 import { WarehouseCreate } from './features/warehouses/warehouse-create/warehouse-create';
 import { WarehouseDetail } from './features/warehouses/warehouse-detail/warehouse-detail';
 import { WarehouseEdit } from './features/warehouses/warehouse-edit/warehouse-edit';
+import { Dashboard } from './features/dashboard/dashboard';
+
 
 
 export const routes: Routes = [
@@ -32,9 +34,14 @@ export const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'products',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
+
+      {
+      path: 'dashboard',
+      component: Dashboard
+    },
 
       {
         path: 'products',

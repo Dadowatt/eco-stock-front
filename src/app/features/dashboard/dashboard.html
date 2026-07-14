@@ -1,0 +1,327 @@
+<div class="dashboard-header mb-4">
+
+  <h1 class="fw-bold text-success">
+    <i class="bi bi-speedometer2 me-2"></i>
+    Tableau de bord Eco-Stock
+  </h1>
+
+  <p class="text-muted mb-0">
+    Suivez l'état de vos stocks et de vos entrepôts en temps réel.
+  </p>
+
+</div>
+
+@if (dashboard.loading()) {
+
+  <div class="text-center py-5">
+
+    <div class="spinner-border text-success" role="status">
+
+      <span class="visually-hidden">
+        Chargement...
+      </span>
+
+    </div>
+
+    <p class="text-muted mt-3">
+      Chargement du tableau de bord...
+    </p>
+
+  </div>
+
+}
+
+
+@if (!dashboard.loading()){
+    <div class="row g-4">
+
+  <!-- Total produits -->
+
+  <div class="col-12 col-sm-6 col-xl-3">
+
+    <div class="stat-card border-primary">
+
+      <div class="stat-icon text-primary">
+
+        <i class="bi bi-box-seam"></i>
+
+      </div>
+
+      <div>
+
+        <h6 class="text-muted mb-1">
+          Produits
+        </h6>
+
+        <h2 class="fw-bold mb-0">
+          {{ dashboard.stats().totalProducts }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Entrepôts -->
+
+  <div class="col-12 col-sm-6 col-xl-3">
+
+    <div class="stat-card border-success">
+
+      <div class="stat-icon text-success">
+
+        <i class="bi bi-buildings"></i>
+
+      </div>
+
+      <div>
+
+        <h6 class="text-muted mb-1">
+          Entrepôts
+        </h6>
+
+        <h2 class="fw-bold mb-0">
+          {{ dashboard.stats().totalWarehouses }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Disponibles -->
+
+  <div class="col-12 col-sm-6 col-xl-3">
+
+    <div class="stat-card border-success">
+
+      <div class="stat-icon text-success">
+
+        <i class="bi bi-check-circle-fill"></i>
+
+      </div>
+
+      <div>
+
+        <h6 class="text-muted mb-1">
+          Disponibles
+        </h6>
+
+        <h2 class="fw-bold mb-0">
+          {{ dashboard.stats().availableProducts }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Réservés -->
+
+  <div class="col-12 col-sm-6 col-xl-3">
+
+    <div class="stat-card border-warning">
+
+      <div class="stat-icon text-warning">
+
+        <i class="bi bi-bookmark-check-fill"></i>
+
+      </div>
+
+      <div>
+
+        <h6 class="text-muted mb-1">
+          Réservés
+        </h6>
+
+        <h2 class="fw-bold mb-0">
+          {{ dashboard.stats().reservedProducts }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Périmés -->
+
+  <div class="col-12 col-sm-6 col-xl-3">
+
+    <div class="stat-card border-danger">
+
+      <div class="stat-icon text-danger">
+
+        <i class="bi bi-exclamation-triangle-fill"></i>
+
+      </div>
+
+      <div>
+
+        <h6 class="text-muted mb-1">
+          Périmés
+        </h6>
+
+        <h2 class="fw-bold mb-0">
+          {{ dashboard.stats().expiredProducts }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="mt-5">
+
+  <h3 class="fw-bold mb-3 text-success">
+
+    <i class="bi bi-buildings me-2"></i>
+
+    Aperçu des entrepôts
+
+  </h3>
+
+
+  <div class="card border-0 shadow-sm">
+
+
+    <div class="table-responsive">
+
+
+      <table class="table align-middle mb-0">
+
+
+        <thead class="table-success">
+
+          <tr>
+
+            <th>
+              Nom
+            </th>
+
+            <th>
+              Localisation
+            </th>
+
+            <th>
+              Capacité
+            </th>
+
+            <th>
+              Produits
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          @for (warehouse of dashboard.warehouses(); track warehouse.id) {
+
+
+            <tr>
+
+              <td class="fw-semibold">
+
+                {{ warehouse.name }}
+
+              </td>
+
+
+              <td>
+
+                {{ warehouse.location }}
+
+              </td>
+
+
+              <td>
+
+                {{ warehouse.capacity }}
+
+              </td>
+
+
+              <td>
+
+                <span class="badge bg-success">
+
+                  {{ warehouse.total_products ?? 0 }}
+
+                  produits
+
+                </span>
+
+              </td>
+
+
+            </tr>
+
+
+          }
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<div class="mt-5">
+
+  <h3 class="fw-bold mb-3 text-success">
+
+    <i class="bi bi-pie-chart-fill me-2"></i>
+
+    Répartition du stock
+
+  </h3>
+
+
+  <div class="card border-0 shadow-sm p-4">
+
+    <div class="chart-container">
+
+      <canvas
+        baseChart
+        [data]="dashboard.chartData()"
+        [type]="'doughnut'">
+      </canvas>
+
+    </div>
+
+  </div>
+
+</div>
+}
+
+
+@if (dashboard.error()) {
+
+  <div class="alert alert-danger">
+
+    <i class="bi bi-exclamation-triangle me-2"></i>
+
+    {{ dashboard.error() }}
+
+  </div>
+
+}

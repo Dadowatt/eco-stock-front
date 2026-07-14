@@ -13,11 +13,12 @@ Eco-Stock est une solution permettant de centraliser la gestion des stocks alime
 L'application frontend permet :
 
 - l'authentification des utilisateurs ;
+- l'accès à un tableau de bord de pilotage des stocks ;
 - la consultation des produits ;
 - la création, modification et suppression des produits ;
 - le déplacement des produits entre entrepôts ;
 - la gestion des entrepôts ;
-- la consultation des informations d'audit.
+- la consultation des informations d'audit des entrepôts.
 
 ---
 
@@ -28,6 +29,22 @@ L'application frontend permet :
 - Connexion utilisateur avec JWT.
 - Protection des routes privées.
 - Gestion automatique du token JWT dans les requêtes HTTP.
+
+### Dashboard
+
+Le tableau de bord permet aux équipes opérationnelles d'avoir une vue globale de l'activité des stocks.
+
+Fonctionnalités :
+
+- Affichage du nombre total de produits.
+- Affichage du nombre total d'entrepôts.
+- Visualisation de la répartition des produits :
+  - disponibles ;
+  - réservés ;
+  - périmés.
+- Affichage du nombre de produits présents dans chaque entrepôt grâce à l'audit fourni par l'API.
+- Visualisation graphique des statistiques de stock avec Chart.js.
+- Mise à jour automatique des données grâce aux Signals Angular.
 
 ### Gestion des produits
 
@@ -45,7 +62,8 @@ L'application frontend permet :
 - Modification d'un entrepôt.
 - Suppression d'un entrepôt.
 - Consultation du détail d'un entrepôt.
-- Affichage du nombre de produits par entrepôt grâce à l'audit.
+- Affichage du nombre de produits par entrepôt grâce à l'endpoint d'audit.
+- Consultation des produits associés à un entrepôt.
 
 ---
 
@@ -58,17 +76,27 @@ L'application frontend permet :
 - **Bootstrap Icons**
 - **Angular Router**
 - **JWT Authentication**
+- **Chart.js**
+- **ng2-charts**
 
 ---
 
 # Architecture du projet
 
-L'application suit une architecture Angular basée sur la séparation des responsabilités :
+L'application suit une architecture Angular basée sur la séparation des responsabilités.
+
+L'organisation est structurée par fonctionnalité (feature-based architecture) avec une séparation entre :
+
+- `core` : éléments partagés de l'application (services, modèles, guards, interceptors, configuration API) ;
+- `features` : fonctionnalités métier de l'application ;
+- `layout` : structure globale de l'interface.
+
 
 ```
 src/app/
 │
 ├── core/
+│   │
 │   ├── config/
 │   │   └── api.config.ts
 │   │
@@ -90,34 +118,106 @@ src/app/
 │   │
 │   └── services/
 │       ├── auth.ts
+│       ├── dashboard.ts
 │       ├── product.ts
 │       └── warehouse.ts
 │
+│
 ├── features/
+│   │
 │   ├── auth/
 │   │   └── login/
+│   │       ├── login.ts
+│   │       ├── login.html
+│   │       └── login.css
+│   │
+│   ├── dashboard/
+│   │   ├── dashboard.ts
+│   │   ├── dashboard.html
+│   │   └── dashboard.css
 │   │
 │   ├── products/
+│   │   │
 │   │   ├── product-list/
 │   │   ├── product-create/
 │   │   ├── product-detail/
 │   │   ├── product-edit/
 │   │   └── product-move/
 │   │
+│   │
 │   └── warehouses/
+│       │
 │       ├── warehouse-list/
 │       ├── warehouse-create/
 │       ├── warehouse-detail/
 │       └── warehouse-edit/
 │
+│
 ├── layout/
+│   │
 │   └── main-layout/
+│       ├── main-layout.ts
+│       ├── main-layout.html
+│       └── main-layout.css
+│
 │
 ├── app.config.ts
 ├── app.routes.ts
+├── app.html
+├── app.css
 └── app.ts
 ```
+# Organisation des dossiers
 
+## Core
+
+Contient les éléments techniques partagés :
+
+- **config** : configuration centralisée des URLs API.
+- **guards** : protection des routes selon l'état d'authentification.
+- **interceptor** : ajout automatique du token JWT dans les requêtes HTTP.
+- **models** : interfaces TypeScript représentant les données manipulées.
+- **services** : gestion des appels API et de l'état applicatif avec Angular Signals.
+
+
+## Features
+
+Organisation par fonctionnalité métier.
+
+### Auth
+
+Gestion de l'authentification utilisateur avec JWT.
+
+### Dashboard
+
+Tableau de bord permettant :
+
+- l'affichage des indicateurs globaux ;
+- le suivi du nombre de produits par entrepôt ;
+- la visualisation de la répartition des produits disponibles, réservés et périmés ;
+- l'affichage graphique des statistiques de stock.
+
+### Products
+
+Gestion complète des produits :
+
+- consultation ;
+- création ;
+- modification ;
+- suppression ;
+- détail ;
+- transfert vers un autre entrepôt.
+
+### Warehouses
+
+Gestion complète des entrepôts :
+
+- consultation ;
+- création ;
+- modification ;
+- suppression ;
+- détail ;
+- consultation du nombre de produits associés grâce à l'audit fourni par l'API.
 ---
 
 # Organisation des dossiers
