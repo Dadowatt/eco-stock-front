@@ -1,7 +1,7 @@
 <div class="dashboard-header mb-4">
 
-  <h1 class="fw-bold text-success">
-    <i class="bi bi-speedometer2 me-2"></i>
+  <h1 class="fw-bold">
+    <i class="bi bi-speedometer2 me-2 text-success"></i>
     Tableau de bord Eco-Stock
   </h1>
 
@@ -30,7 +30,6 @@
   </div>
 
 }
-
 
 @if (!dashboard.loading()){
     <div class="row g-4">
@@ -62,8 +61,6 @@
     </div>
 
   </div>
-
-
 
   <!-- Entrepôts -->
 
@@ -191,12 +188,9 @@
 
   <div class="card border-0 shadow-sm">
 
-
     <div class="table-responsive">
 
-
       <table class="table align-middle mb-0">
-
 
         <thead class="table-success">
 
@@ -221,14 +215,9 @@
           </tr>
 
         </thead>
-
-
         <tbody>
 
-
           @for (warehouse of dashboard.warehouses(); track warehouse.id) {
-
-
             <tr>
 
               <td class="fw-semibold">
@@ -236,53 +225,31 @@
                 {{ warehouse.name }}
 
               </td>
-
-
               <td>
 
                 {{ warehouse.location }}
 
               </td>
-
-
               <td>
 
                 {{ warehouse.capacity }}
 
               </td>
 
-
               <td>
 
                 <span class="badge bg-success">
 
                   {{ warehouse.total_products ?? 0 }}
-
                   produits
-
                 </span>
-
               </td>
-
-
             </tr>
-
-
           }
-
-
         </tbody>
-
-
       </table>
-
-
     </div>
-
-
   </div>
-
-
 </div>
 
 <div class="mt-5">
@@ -294,8 +261,6 @@
     Répartition du stock
 
   </h3>
-
-
   <div class="card border-0 shadow-sm p-4">
 
     <div class="chart-container">
@@ -312,7 +277,6 @@
 
 </div>
 }
-
 
 @if (dashboard.error()) {
 
