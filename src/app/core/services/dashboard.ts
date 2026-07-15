@@ -69,6 +69,11 @@ export class DashboardService {
 
 });
 
+    getProductsByWarehouse(warehouseId: number) {
+    return this.product.products()
+        .filter(product => product.warehouse === warehouseId);
+    }
+
     loadDashboard(): void {
 
         this.product.loadProducts();

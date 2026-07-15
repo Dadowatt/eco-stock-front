@@ -4,6 +4,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Warehouse } from '../../../core/services/warehouse';
 import { Warehouse as WarehouseModel } from '../../../core/models/warehouse';
+import { Product as ProductModel } from '../../../core/models/product';
+import { Product } from '../../../core/services/product';
 
 
 @Component({
@@ -21,9 +23,21 @@ export class WarehouseDetail implements OnInit {
   private warehouseService = inject(Warehouse);
   warehouse?: WarehouseModel;
 
+  private product = inject(Product);
+  products: ProductModel[] = [];
+
   loading = true;
 
   error = '';
+
+  loadProducts(warehouseId: number): void {
+
+  this.products = this.product.products()
+    .filter(product =>
+      product.warehouse === warehouseId
+    );
+
+}
 
   ngOnInit(): void {
     const id = Number(
@@ -33,8 +47,13 @@ export class WarehouseDetail implements OnInit {
       this.warehouseService.getWarehouseById(id);
 
     if (existingWarehouse) {
+
       this.warehouse = existingWarehouse;
+
+      this.loadProducts(id);
+
       this.loading = false;
+
       return;
     }
     this.warehouseService
